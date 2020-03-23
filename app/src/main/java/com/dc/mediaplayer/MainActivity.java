@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -14,10 +16,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button bPlay = (Button)findViewById(R.id.play);
+        final Button bPlay = (Button)findViewById(R.id.play);
         Button bPause = (Button)findViewById(R.id.pause);
 
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.Janudi);
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.janudi);
 
         bPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +31,10 @@ public class MainActivity extends AppCompatActivity {
         bPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mediaPlayer.stop();
+                if(mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                }
+
             }
         });
     }
